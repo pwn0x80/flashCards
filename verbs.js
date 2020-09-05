@@ -1,12 +1,8 @@
 var vocab = {
     0: {
-        verb: "müssen",
-        ich: "muss",
-        du: "musst",
-        er_sie_es: "muss",
-        wir: "müssen",
-        ihr: "müsst",
-        Sie: "müssen"
+        verb: "hello boysssssssssssssssssssssss",
+        ich: "nooooooooooooooooooooooooooooway",
+        
     },
     1: {
         verb: "haben",
