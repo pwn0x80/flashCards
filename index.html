@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://i.imgur.com/u9A1thm.png" />
+    <meta name="twitter:title" content="Ich Lerne Deutsch" />
+    <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flash cards</title>
+
+    <link href="style.css" rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="verbs.js"></script>
+
+</head>
+
+<body onload="getFirstCard()">
+    <h1>German Flash Cards</h1>
+    <h3>Just tryna learn those verbs</h3>
+
+    <div id="front" class="animated flipInY faster" style="display:block" onclick="switcher()">hi</div>
+
+    <div id='wrapper' class="animated flipInY faster" style="display:none">
+        <div class='grid-container' onclick="switcher()">
+            <div class="box left1">ich</div>
+            <div class="box" id='right1'></div>
+            <div class="box left2">du</div>
+            <div class="box" id='right2'>4</div>
+            <div class="box left3">er/sie/es</div>
+            <div class="box" id='right3'>6</div>
+            <div class="box left4">wir</div>
+            <div class="box" id='right4'>8</div>
+            <div class="box left5">ihr</div>
+            <div class="box" id='right5'>10</div>
+            <div class="box left6">Sie/sie</div>
+            <div class="box" id='right6'>12</div>
+        </div>
+        <!-- <div class='def' id='def'>definition</div> -->
+    </div>
+
+    <h1 id='next' onclick="nextCard()">Next Card</h1>
+
+
+    <script>
+
+        var randoNumber;
+        const lengthOfVocabList = Object.keys(vocab).length;
+
+        //flip card on click
+        function switcher() {
+            var d1 = document.getElementById("wrapper");
+            var d2 = document.getElementById("front");
+
+            if (d1.style.display == "none") {
+                d1.style.display = "block";
+                d2.style.display = "none";
+
+            } else {
+                d1.style.display = "none";
+                d2.style.display = "block";
+            }
+        }
+
+        function getRandomNumber(maxNum) {
+
+            return Math.floor(Math.random() * (maxNum));
+
+        }
+
+        function getFirstCard() {
+
+            randoNumber = getRandomNumber(lengthOfVocabList);
+            start(randoNumber);
+        }
+
+        function start(x) {
+
+            //loop this eventually
+            document.getElementById("front").innerHTML = vocab[x].verb;
+            document.getElementById("right1").innerHTML = vocab[x].ich;
+            document.getElementById("right2").innerHTML = vocab[x].du;
+            document.getElementById("right3").innerHTML = vocab[x].er_sie_es;
+            document.getElementById("right4").innerHTML = vocab[x].wir;
+            document.getElementById("right5").innerHTML = vocab[x].ihr;
+            document.getElementById("right6").innerHTML = vocab[x].Sie;
+
+        }
+
+        function nextCard() {
+
+            var newRando;
+
+            //make sure to not roll same number in a row
+            do {
+                newRando = getRandomNumber(lengthOfVocabList);
+            } while (randoNumber === newRando);
+
+            randoNumber = newRando;
+            start(randoNumber);
+
+
+            ////animation stuff
+            //if you hit next card while on the back, switch to front
+            var d1 = document.getElementById("wrapper");
+            var d2 = document.getElementById("front");
+
+            if (d2.style.display == "none") {
+                d2.style.display = "block";
+                d1.style.display = "none";
+            }
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
